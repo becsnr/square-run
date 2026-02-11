@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    background-color: black;
+}
+
+#player {
+    background-color: hotpink;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+}
