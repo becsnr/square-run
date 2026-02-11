@@ -1,10 +1,23 @@
 const player = document.getElementById('player');
+const triangulo = document.getElementById('obstaculo');
 
 let state = {
     x: 100, // posição horizontal
     y: 100, // posição vertical
     speed: 5 // velocidade
 };
+
+let keys = { // estado do teclado
+    up: false,
+    down: false,
+    left: false,
+    right: false
+};
+
+let obstaculo = {
+    x: 250,
+    y: 250
+}
 
 function clamp() {
     state.x = Math.max(0, Math.min(state.x, 760)); // nunca pode ser menor q 0 e nem maior q 760
@@ -17,16 +30,12 @@ function render() { // isso desenha o quadrado na posição do state
 
     player.style.left = state.x + 'px'; // mover horizontal
     player.style.top = state.y + 'px'; // mover vertical
+
+    triangulo.style.left = obstaculo.x + 'px';
+    triangulo.style.top = obstaculo.y + 'px';
 }
 
 render();
-
-let keys = { // estado do teclado
-    up: false,
-    down: false,
-    left: false,
-    right: false
-};
 
 document.addEventListener("keydown", (event) => {
     // pegar a posição atual e soma ou subtrai a velocidade
@@ -85,7 +94,26 @@ function update() {
     }
 
     render();
+    colidir();
 }
 
 // ativar o update. isso faz rodar a cada x ms
 setInterval(update, 16);
+
+function colidir() {
+
+    let playerEsquerda = player.offsetLeft;
+    let playerDireita = player.offsetLeft + player.offsetWidth;
+    let playerTopo = player.offsetTop;
+    let playerBaixo = player.offsetTop + player.offsetHeight;
+
+    let obstaculoEsquerda = triangulo.offsetLeft;
+    let obstaculoDireita = triangulo.offsetLeft + triangulo.offsetWidth;
+    let obstaculoTopo = triangulo.offsetTop;
+    let obstaculoBaixo = triangulo.offsetTop + triangulo.offsetHeight;
+
+    if (playerDireita > obstaculoEsquerda && playerEsquerda < obstaculoDireita && playerBaixo > obstaculoTopo && playerTopo < obstaculoBaixo) {
+        render()
+        console.log('colidiu')
+    }
+}
