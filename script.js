@@ -1,6 +1,7 @@
 const player = document.getElementById('player');
 const triangulo = document.getElementById('obstaculo');
 const titulo = document.getElementById('titulo');
+const info = document.getElementById('info');
 
 let state = {
     x: 100, // posição horizontal
@@ -77,12 +78,17 @@ document.addEventListener("keyup", (event) => {
     if (event.key === "ArrowLeft" || event.key === "a") {
         keys.left = false;
     }
+
+    if (event.key === "r" && gameOver) {
+        restart();
+    }
 });
 
 function update() {
 
     if (gameOver) {
         titulo.innerText = 'GAME OVER';
+        info.innerText = 'aperte a tecla "R" para reiniciar.'
 
         player.style.backgroundColor = 'red';
         return;
@@ -127,4 +133,18 @@ function colidir() {
         gameOver = true;
         console.log('colidiu')
     }
+}
+
+function restart() {
+    gameOver = false;
+
+    titulo.innerText = '';
+    info.innerText = '';
+
+    state.x = 100;
+    state.y = 100;
+
+    player.style.backgroundColor = 'hotpink';
+
+    render();
 }

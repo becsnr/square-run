@@ -11,6 +11,13 @@ h1 {
     text-align: center;
     padding-top: 50px;
     font-size: 3em;
+    margin: 0;
+}
+
+p {
+    text-align: center;
+    color: gray;
+    
 }
 
 #player {
