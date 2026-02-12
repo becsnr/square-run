@@ -1,5 +1,6 @@
 const player = document.getElementById('player');
 const triangulo = document.getElementById('obstaculo');
+const titulo = document.getElementById('titulo');
 
 let state = {
     x: 100, // posição horizontal
@@ -18,6 +19,8 @@ let obstaculo = {
     x: 250,
     y: 250
 }
+
+let gameOver = false;
 
 function clamp() {
     state.x = Math.max(0, Math.min(state.x, 760)); // nunca pode ser menor q 0 e nem maior q 760
@@ -77,6 +80,14 @@ document.addEventListener("keyup", (event) => {
 });
 
 function update() {
+
+    if (gameOver) {
+        titulo.innerText = 'GAME OVER';
+
+        player.style.backgroundColor = 'red';
+        return;
+    }
+
     if (keys.up) {
         state.y -= state.speed;
     }
@@ -113,7 +124,7 @@ function colidir() {
     let obstaculoBaixo = triangulo.offsetTop + triangulo.offsetHeight;
 
     if (playerDireita > obstaculoEsquerda && playerEsquerda < obstaculoDireita && playerBaixo > obstaculoTopo && playerTopo < obstaculoBaixo) {
-        render()
+        gameOver = true;
         console.log('colidiu')
     }
 }
