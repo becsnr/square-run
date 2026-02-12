@@ -1,2 +1,2 @@
 # square-run
-Square Run é um mini jogo 2D feito com JavaScript puro, onde o jogador controla um quadrado que precisa se mover pela tela sem ultrapassar os limites. O projeto foi criado para praticar manipulação de estado, eventos de teclado e lógica de colisão.
+Mini jogo 2D em JavaScript onde o jogador precisa fugir de um obstáculo perseguidor. Possui colisão, Game Over e restart.
