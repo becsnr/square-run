@@ -18,7 +18,8 @@ let keys = { // estado do teclado
 
 let obstaculo = {
     x: 250,
-    y: 250
+    y: 250,
+    speed: 2
 }
 
 let gameOver = false;
@@ -110,6 +111,21 @@ function update() {
         state.x -= state.speed;
     }
 
+    // MOVIMENTO DO OBSTACULO
+
+    // seguir no eixo x
+    if (state.x > obstaculo.x) {
+        obstaculo.x += obstaculo.speed;
+    } else if (state.x < obstaculo.x) {
+        obstaculo.x -= obstaculo.speed;
+    }
+    // seguir no eixo y
+    if (state.y > obstaculo.y) {
+        obstaculo.y += obstaculo.speed;
+    } else if (state.y < obstaculo.y) {
+        obstaculo.y -= obstaculo.speed;
+    }
+
     render();
     colidir();
 }
@@ -143,6 +159,9 @@ function restart() {
 
     state.x = 100;
     state.y = 100;
+
+    obstaculo.x = 250;
+    obstaculo.y = 250;
 
     player.style.backgroundColor = 'hotpink';
 
